@@ -40,7 +40,10 @@ exports.deploy = (config) ->
 
     ### Fetch code ###
     @log "Fetch code"
-
+    if @del_git_dir
+      @cd dir, "tmp"
+      @cmd "rm", "-rf", "scm"
+    @cd "dir"
     # Checkout repo
     @if_not_dir_exists "tmp/scm/.git", ->
       @cd dir, "tmp"
