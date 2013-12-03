@@ -35,6 +35,9 @@ exports.deploy = (config) ->
     for shared_dir in config["shared_dirs"]
       @mkdir dir, "shared", shared_dir
 
+    # Change to the dir before fetching code
+    @cd dir
+
     ### Fetch code ###
     @log "Fetch code"
 
