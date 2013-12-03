@@ -54,9 +54,9 @@ init_config = ->
     shared_dirs: ["node_modules", "db"]
     prerun: [
       "npm install",
-      "echo 'prerun'"
+      "npm test"
     ]
-    run_cmd: "echo 'run_cmd'"
+    run_cmd: "npm start"
 
   # Ensure deploy script doesn't exist
   config_path = "deploy.json"
