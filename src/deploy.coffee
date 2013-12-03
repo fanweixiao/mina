@@ -40,10 +40,15 @@ exports.deploy = (config) ->
 
     ### Fetch code ###
     @log "Fetch code"
-    if @del_git_dir
+
+    # Check if need remove all git dir first
+    if config["force_regenerate_git_dir"]
       @cd dir, "tmp"
       @cmd "rm", "-rf", "scm"
+
+    # Change dir to `dir` for more operations
     @cd "dir"
+
     # Checkout repo
     @if_not_dir_exists "tmp/scm/.git", ->
       @cd dir, "tmp"

@@ -50,7 +50,7 @@ init_config = ->
     repo: "git@github.com:user/repo.git"
     prj_git_relative_dir: ""
     branch: "master"
-    del_git_dir: true
+    force_regenerate_git_dir: false
     shared_dirs: ["node_modules", "db"]
     prerun: [
       "npm install",
