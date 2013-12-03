@@ -94,7 +94,7 @@ exports.deploy = (config) ->
         printf: "%f\\n"
 
     @assign_output "num_dirs", 'echo "$release_dirs" | wc -l'
-    @if_math "num_dirs > 10", ->
+    @if_math "num_dirs > "+(config["history_releases_count"]||10), ->
       @pipe (->
               @raw 'echo "$release_dirs" | sort -n | head -n1'),
             (->
