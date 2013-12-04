@@ -47,7 +47,7 @@ exports.deploy = (config) ->
       @cmd "rm", "-rf", "scm"
 
     # Change dir to `dir` for more operations
-    @cd "dir"
+    @cd dir
 
     # Checkout repo
     @if_not_dir_exists "tmp/scm/.git", ->
@@ -105,9 +105,11 @@ exports.deploy = (config) ->
         printf: "%f\\n"
 
     @assign_output "num_dirs", 'echo "$release_dirs" | wc -l'
-    @if_math "num_dirs > "+(config["history_releases_count"]||10), ->
+    @raw "dirs_num_to_keep=#{config["history_releases_count"] || 10}"
+    @if_math "num_dirs > dirs_num_to_keep", ->
       @pipe (->
-              @raw 'echo "$release_dirs" | sort -n | head -n1'),
+              @math "dirs_num_to_remove=$num_dirs-$dirs_num_to_keep"
+              @raw 'echo "$release_dirs" | sort -n | head -n$dirs_num_to_remove'),
             (->
               @while "read rm_dir", ->
                 @cmd "rm", "-rf", "$rm_dir")
