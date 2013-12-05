@@ -8,7 +8,8 @@ clc          = require "cli-color"
 ####
 exports.deploy = (config) ->
   dir = config["server_dir"]
-
+  history_releases_count = config["history_releases_count"] || 2
+  history_releases_count = 2 if history_releases_count < 2;
   # Open connection to server
   p = spawn "ssh", [config["server"], "bash -s"], stdio: ["pipe", 1, 2]
 
@@ -92,11 +93,13 @@ exports.deploy = (config) ->
         mindepth: 1
         type: "d"
         printf: "%f\\n"
-
+    @log "history_releases_count : "+history_releases_count
+    @assign_output "history_releases_count",'echo '+history_releases_count
     @assign_output "num_dirs", 'echo "$release_dirs" | wc -l'
-    @if_math "num_dirs > "+(config["history_releases_count"]||10), ->
+    @if_math "num_dirs > "+history_releases_count, ->
+      @assign_output "dif_num_dir",'echo `expr "$num_dirs" - "$history_releases_count"`'
       @pipe (->
-              @raw 'echo "$release_dirs" | sort -n | head -n1'),
+              @raw 'echo "$release_dirs" | sort -n | head -n"$dif_num_dir"'),
             (->
               @while "read rm_dir", ->
                 @cmd "rm", "-rf", "$rm_dir")
