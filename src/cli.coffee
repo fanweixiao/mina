@@ -1,4 +1,5 @@
 fs           = require "fs"
+path         = require "path"
 clc          = require "cli-color"
 parse_config = (require "./config").parse
 {deploy}     = require "./deploy"
@@ -12,7 +13,15 @@ exports.run = (args) ->
     when "help" then print_usage()
     when "init" then init_config()
     when "deploy" then do_deploy args[1]
+    when "completion=bash" then print_completion('bash')
+    when "completion=zsh" then print_completion('zsh')
     else print_usage()
+
+print_completion = (name)->
+  code = 0
+  filepath = path.join __dirname, '../completion', name
+  console.log String fs.readFileSync filepath
+  process.exit code
 
 print_usage = ->
   commands =
@@ -50,12 +59,13 @@ init_config = ->
     repo: "git@github.com:user/repo.git"
     prj_git_relative_dir: ""
     branch: "master"
+    force_regenerate_git_dir: false
     shared_dirs: ["node_modules", "db"]
     prerun: [
       "npm install",
-      "echo 'prerun'"
+      "npm test"
     ]
-    run_cmd: "echo 'run_cmd'"
+    run_cmd: "npm start"
 
   # Ensure deploy script doesn't exist
   config_path = "deploy.json"

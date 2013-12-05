@@ -1,18 +1,17 @@
 {
   "name": "mina",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "Lightweight deployer for node development, inspired by mina and minco",
-  "homepage": "",
-  "bug": "https://github.com/fanweixiao/mina/issues",
+  "homepage": "http://onlyvc.us/mina",
+  "bugs": "https://github.com/fanweixiao/mina/issues",
   "dependencies": {
-    "cli-color": "*"
+    "cli-color": "~0.2.3",
+    "nopt": "~2.1.2"
   },
   "devDependencies": {
     "coffee-script": "*"
   },
-  "directories": {
-    "lib": "./lib"
-  },
+  "files": ["lib","bin","completion"],
   "bin": {
     "mina": "./bin/mina-cli"
   },
@@ -21,7 +20,7 @@
   },
   "repository": {
     "type": "git",
-    "url" : "https://github.com/fanweixiao/mina"
+    "url": "https://github.com/fanweixiao/mina"
   },
   "keywords": [
     "deploy",

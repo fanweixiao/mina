@@ -8,8 +8,7 @@ clc          = require "cli-color"
 ####
 exports.deploy = (config) ->
   dir = config["server_dir"]
-  history_releases_count = config["history_releases_count"] || 2
-  history_releases_count = 2 if history_releases_count < 2;
+
   # Open connection to server
   p = spawn "ssh", [config["server"], "bash -s"], stdio: ["pipe", 1, 2]
 
@@ -36,8 +35,19 @@ exports.deploy = (config) ->
     for shared_dir in config["shared_dirs"]
       @mkdir dir, "shared", shared_dir
 
+    # Change to the dir before fetching code
+    @cd dir
+
     ### Fetch code ###
     @log "Fetch code"
+
+    # Check if need remove all git dir first
+    if config["force_regenerate_git_dir"]
+      @cd dir, "tmp"
+      @cmd "rm", "-rf", "scm"
+
+    # Change dir to `dir` for more operations
+    @cd dir
 
     # Checkout repo
     @if_not_dir_exists "tmp/scm/.git", ->
@@ -93,13 +103,13 @@ exports.deploy = (config) ->
         mindepth: 1
         type: "d"
         printf: "%f\\n"
-    @log "history_releases_count : "+history_releases_count
-    @assign_output "history_releases_count",'echo '+history_releases_count
+
     @assign_output "num_dirs", 'echo "$release_dirs" | wc -l'
-    @if_math "num_dirs > "+history_releases_count, ->
-      @assign_output "dif_num_dir",'echo `expr "$num_dirs" - "$history_releases_count"`'
+    @raw "dirs_num_to_keep=#{config["history_releases_count"] || 10}"
+    @if_math "num_dirs > dirs_num_to_keep", ->
       @pipe (->
-              @raw 'echo "$release_dirs" | sort -n | head -n"$dif_num_dir"'),
+              @math "dirs_num_to_remove=$num_dirs-$dirs_num_to_keep"
+              @raw 'echo "$release_dirs" | sort -n | head -n$dirs_num_to_remove'),
             (->
               @while "read rm_dir", ->
                 @cmd "rm", "-rf", "$rm_dir")
