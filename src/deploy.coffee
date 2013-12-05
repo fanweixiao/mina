@@ -8,7 +8,7 @@ clc          = require "cli-color"
 ####
 exports.deploy = (config) ->
   dir = config["server_dir"]
-
+  config["history_releases_count"] = 2 if config["history_releases_count"] && config["history_releases_count"] < 2
   # Open connection to server
   p = spawn "ssh", [config["server"], "bash -s"], stdio: ["pipe", 1, 2]
 
