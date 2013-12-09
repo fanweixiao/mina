@@ -1,4 +1,7 @@
 # Mina [![NPM version](https://badge.fury.io/js/mina.png)](http://badge.fury.io/js/mina)
+
+[![NPM](https://nodei.co/npm/mina.png?downloads=true)](https://nodei.co/npm/mina/)
+
 A simple deploy tool inspired by [mina](http://nadarei.co/mina), based on [minco](https://github.com/dsmatter/minco). This project is powered by [node](http://nodejs.org), forcus on quick and lightweight deployment and server automation over ssh for [node](http://nodejs.org) projects.
 
 ## Latest Version
