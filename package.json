@@ -11,7 +11,7 @@
   "devDependencies": {
     "coffee-script": "*"
   },
-  "files": ["lib","bin","completion"],
+  "files": ["bin","completion","lib"],
   "bin": {
     "mina": "./bin/mina-cli"
   },

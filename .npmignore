@@ -1,0 +1,6 @@
+node_modules
+src
+.git
+.gitignore
+AUTHORS
+Makefile
