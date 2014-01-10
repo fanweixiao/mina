@@ -66,7 +66,7 @@ exports.deploy = (config) ->
     @raw 'rno="$(readlink "' + (path.join dir, "current") + '")"'
     @raw 'rno="$(basename "$rno")"'
     @math "rno=$rno+1"
-    @cmd "cp", "-r", (path.join dir, "tmp", "scm", config["prj_git_relative_dir"]), (path.join dir, "releases", "$rno")
+    @cmd "cp", "-r", (path.join dir, "tmp", "scm", config["prj_git_relative_dir"] || ""), (path.join dir, "releases", "$rno")
 
     ### Link shared dirs ###
     @log "Link shared dirs"
