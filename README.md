@@ -40,7 +40,7 @@ Add this to your .bashrc, In this version only support bash
         // Directories of your project in this array will use a 
         // symbolic instead create every time when run deploy        
         , "shared_dirs": ["node_modules", "db"]        
-        // How many release snapshot keep away from auto cleanup, 
+        // How many release snapshots keep away from auto cleanup, 
         // default is 10 if not presents
         , "history_releases_count": 10        
         // Run customize scripts before run
