@@ -12,7 +12,7 @@ class BashScript
     @stream.end()
 
   raw: (raw) ->
-    #console.log ">>#{raw}"
+    # console.log ">>#{raw}"
     @stream.write raw + "\n"
 
   shebang: ->

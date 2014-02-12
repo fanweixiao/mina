@@ -74,6 +74,7 @@ exports.deploy = (config) ->
     @cd dir, "releases", "$rno"
     for shared_dir in config["shared_dirs"]
       @mkdir (path.dirname shared_dir)
+      @raw "[ -h #{shared_dir}] && unlink #{shared_dir}"
       @cmd "ln", "-s", (path.join dir, "shared", shared_dir), shared_dir
 
     ### Run pre-start scripts ###
