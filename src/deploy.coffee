@@ -8,13 +8,19 @@ clc          = require "cli-color"
 ####
 exports.deploy = (config) ->
   dir = config["server_dir"]
+  server = config["server"]
   config["history_releases_count"] = 2 if config["history_releases_count"] && config["history_releases_count"] < 2
+  if server instanceof String
+    initDeploy server, config
+  if server instanceof Array
+    initDeploy s, config for s in server
+
+initDeploy = (config) ->
   # Open connection to server
   p = spawn "ssh", [config["server"], "bash -s"], stdio: ["pipe", 1, 2]
 
   # Write script directly to SSH's STDIN
   bs = new BashScript p.stdin
-
   # Initiate deployment
   bs.queue ->
     ### Write cleanup function ###
