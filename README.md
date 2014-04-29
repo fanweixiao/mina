@@ -57,3 +57,8 @@ Add this to your .bashrc, In this version only support bash
 
     # Or, indicate deploy config file
     MINA_CONFIG=deploy_scripts/to_dev.json mina deploy
+    
+    # Keep in mind...
+    
+    + You have to ensure the username used for ssh have permission for operating directories
+    + You have to ensure the remote server could execute `git clone`, that's means `git-core` must be installed, and, can clone the project from you git-repo.
