@@ -55,6 +55,7 @@ do_deploy = (config_path) ->
 init_config = ->
   example_conf =
     server: "user@host"
+    port: 22
     server_dir: "/path/to/dir/on/server"
     repo: "git@github.com:user/repo.git"
     prj_git_relative_dir: ""

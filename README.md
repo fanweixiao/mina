@@ -25,6 +25,8 @@ Add this to your .bashrc, In this version only support bash
     {
         // Server to deploy to
         "server": "user@host"
+        // Port
+        "port": 13
         // Deploy to this dir on server
         , "server_dir": "/path/to/dir/on/server"
         // Git repository, only support git right now
