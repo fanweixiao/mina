@@ -5,7 +5,7 @@
 A simple deploy tool inspired by [mina](http://nadarei.co/mina), based on [minco](https://github.com/dsmatter/minco). This project is powered by [node](http://nodejs.org), forcus on quick and lightweight deployment and server automation over ssh for [node](http://nodejs.org) projects.
 
 ## Latest Version
-[v1.0.2](https://npmjs.org/package/mina)
+[v1.0.3](https://npmjs.org/package/mina)
 
 ## Installation
 Make sure you have installed node.js including NPM
