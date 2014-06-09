@@ -6,19 +6,29 @@ clc          = require "cli-color"
 ####
 ### Send commands to server ###
 ####
+
 exports.deploy = (config) ->
+  xtermColor = 13
+  server = config["server"]
+  if typeof server == "string"
+    initDeploy server, config, clc.xterm(xtermColor).bold
+  else if server instanceof Array
+    for s in server
+      initDeploy s, config, clc.xterm(xtermColor).bold
+      xtermColor += 1
+
+initDeploy = (server, config, color) ->
   dir = config["server_dir"]
   config["history_releases_count"] = 2 if config["history_releases_count"] && config["history_releases_count"] < 2
   # Open connection to server
   _srv_args = []
-  _srv_args.push config["server"]
+  _srv_args.push server
   _srv_args.push "-p #{config['port']}" if config["port"]
   _srv_args.push "bash -s"
   p = spawn "ssh", _srv_args, stdio: ["pipe", 1, 2]
 
   # Write script directly to SSH's STDIN
   bs = new BashScript p.stdin
-
   # Initiate deployment
   bs.queue ->
     ### Write cleanup function ###
@@ -28,13 +38,13 @@ exports.deploy = (config) ->
         @cmd "rm", "-rf", release_dir
 
     ### Basic setup ###
-    @log "Create subdirs"
+    @log server + " Create subdirs", color
 
     for subdir in ["shared", "releases", "tmp"]
       @mkdir dir, subdir
 
     # Create shared dirs
-    @log "Create shared dirs"
+    @log server + " Create shared dirs", color
 
     for shared_dir in config["shared_dirs"]
       @mkdir dir, "shared", shared_dir
@@ -43,7 +53,7 @@ exports.deploy = (config) ->
     @cd dir
 
     ### Fetch code ###
-    @log "Fetch code"
+    @log server + " Fetch code", color
 
     # Check if need remove all git dir first
     if config["force_regenerate_git_dir"]
@@ -65,7 +75,7 @@ exports.deploy = (config) ->
     @cmd "git", "pull"
 
     # Copy code to release dir
-    @log "Copy code to release dir"
+    @log server + " Copy code to release dir", color
     # Compute version number
     @raw 'rno="$(readlink "' + (path.join dir, "current") + '")"'
     @raw 'rno="$(basename "$rno")"'
@@ -73,7 +83,7 @@ exports.deploy = (config) ->
     @cmd "cp", "-r", (path.join dir, "tmp", "scm", config["prj_git_relative_dir"] || ""), (path.join dir, "releases", "$rno")
 
     ### Link shared dirs ###
-    @log "Link shared dirs"
+    @log server + " Link shared dirs"
 
     @cd dir, "releases", "$rno"
     for shared_dir in config["shared_dirs"]
@@ -82,16 +92,16 @@ exports.deploy = (config) ->
       @cmd "ln", "-s", (path.join dir, "shared", shared_dir), shared_dir
 
     ### Run pre-start scripts ###
-    @log "Run pre-start scripts"
+    @log server + " Run pre-start scripts", color
     for cmd in config["prerun"]
       @raw_cmd cmd
 
     ### Start the service ###
-    @log "Start service"
+    @log server + " Start service", color
     @raw_cmd config["run_cmd"]
 
     ### Update current link ###
-    @log "Update current link"
+    @log server + " Update current link", color
 
     @cd dir
     @if_link_exists "current", ->
@@ -99,7 +109,7 @@ exports.deploy = (config) ->
     @cmd "ln", "-s", "releases/$rno", "current"
 
     ### Clean the release dir ###
-    @log "Cleaning release dir"
+    @log server + " Cleaning release dir", color
 
     @cd dir, "releases"
     @assign_output "release_dirs",
