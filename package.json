@@ -1,12 +1,12 @@
 {
   "name": "mina",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Lightweight deployer for node development, inspired by mina and minco",
   "homepage": "http://onlyvc.us/mina",
   "bugs": "https://github.com/fanweixiao/mina/issues",
   "dependencies": {
-    "cli-color": "~0.2.3",
-    "nopt": "~2.1.2"
+    "cli-color": "~0.3.2",
+    "nopt": "~3.0.0"
   },
   "devDependencies": {
     "coffee-script": "*"
@@ -36,7 +36,8 @@
   "author": "C.C. <fanweixiao@gmail.com> (http://onlyvc.us)",
   "contributors": [
     "Nealma <neal.ma.sh@gmail.com>",
-    "Houjiazong <houjiazong@gmail.com>"
+    "Houjiazong <houjiazong@gmail.com>",
+    "BordenJardine <bordenjardine@gmail.com>"
   ],
   "readmeFilename": "README.md",
   "preferGlobal": true,

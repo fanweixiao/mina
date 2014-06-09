@@ -5,7 +5,7 @@
 A simple deploy tool inspired by [mina](http://nadarei.co/mina), based on [minco](https://github.com/dsmatter/minco). This project is powered by [node](http://nodejs.org), forcus on quick and lightweight deployment and server automation over ssh for [node](http://nodejs.org) projects.
 
 ## Latest Version
-[v1.0.3](https://npmjs.org/package/mina)
+[v1.0.4](https://npmjs.org/package/mina)
 
 ## Installation
 Make sure you have installed node.js including NPM
@@ -23,10 +23,10 @@ Add this to your .bashrc, In this version only support bash
 
     # Adjust it to your needs in deploy.json
     {
-        // Server to deploy to
-        "server": "user@host"
+        // Servers to deploy to
+        "server": ["user@host1","user@host2"]
         // Port
-        "port": 13
+        , "port": 13
         // Deploy to this dir on server
         , "server_dir": "/path/to/dir/on/server"
         // Git repository, only support git right now
@@ -59,8 +59,13 @@ Add this to your .bashrc, In this version only support bash
 
     # Or, indicate deploy config file
     MINA_CONFIG=deploy_scripts/to_dev.json mina deploy
-    
+
     # Keep in mind...
-    
+
     + You have to ensure the username used for ssh have permission for operating directories
     + You have to ensure the remote server could execute `git clone`, that's means `git-core` must be installed, and, can clone the project from you git-repo.
+
+    # Contributors
+
+    + Houjiazong <houjiazong@gmail.com>
+    + BordenJardine <bordenjardine@gmail.com>
