@@ -71,8 +71,9 @@ initDeploy = (server, config, color) ->
 
     # Update repo
     @cd dir, "tmp", "scm"
+    @cmd "git", "fetch"
     @cmd "git", "checkout", config["branch"]
-    @cmd "git", "pull"
+    @cmd "git", "rebase", "origin/#{config["branch"]}" 
 
     # Copy code to release dir
     @log server + " Copy code to release dir", color
