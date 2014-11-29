@@ -67,5 +67,6 @@ Add this to your .bashrc, In this version only support bash
 
     # Contributors
 
+    + Neal <neal.ma.sh@gmail.com>
     + Houjiazong <houjiazong@gmail.com>
     + BordenJardine <bordenjardine@gmail.com>
