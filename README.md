@@ -71,3 +71,4 @@ Add this to your .bashrc, In this version only support bash
 + Houjiazong <houjiazong@gmail.com>
 + BordenJardine <bordenjardine@gmail.com>
 + [Marcus Vorwaller](https://github.com/marcus)
++ [Allan Wind](https://github.com/allanwind)
