@@ -97,10 +97,6 @@ initDeploy = (server, config, color) ->
     for cmd in config["prerun"]
       @raw_cmd cmd
 
-    ### Start the service ###
-    @log server + " Start service", color
-    @raw_cmd config["run_cmd"]
-
     ### Update current link ###
     @log server + " Update current link", color
 
@@ -108,6 +104,10 @@ initDeploy = (server, config, color) ->
     @if_link_exists "current", ->
       @cmd "rm", "current"
     @cmd "ln", "-s", "releases/$rno", "current"
+
+    ### Start the service ###
+    @log server + " Start service", color
+    @raw_cmd config["run_cmd"]
 
     ### Clean the release dir ###
     @log server + " Cleaning release dir", color
