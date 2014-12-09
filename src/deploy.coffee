@@ -107,6 +107,8 @@ initDeploy = (server, config, color) ->
 
     ### Start the service ###
     @log server + " Start service", color
+    @cmd "pwd"
+    @cd "current"
     @raw_cmd config["run_cmd"]
 
     ### Clean the release dir ###
