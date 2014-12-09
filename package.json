@@ -1,6 +1,6 @@
 {
   "name": "mina",
-  "version": "1.0.8",
+  "version": "1.0.9",
   "description": "Lightweight deployer for node development, inspired by mina and minco",
   "homepage": "http://onlyvc.us/mina",
   "bugs": "https://github.com/fanweixiao/mina/issues",
