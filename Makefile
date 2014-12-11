@@ -1,7 +1,7 @@
 COFFEE=coffee
 
-build:
-	$(COFFEE) -co lib src
+build: clean
+	@$(COFFEE) -co lib src
 
 clean:
-	rm -rf lib
+	@rm -rf lib
