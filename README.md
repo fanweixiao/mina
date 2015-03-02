@@ -1,4 +1,4 @@
-# Mina [![NPM version](https://badge.fury.io/js/mina.png)](http://badge.fury.io/js/mina) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CenturyUna/mina?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+# Mina [![NPM version](https://badge.fury.io/js/mina.png)](http://badge.fury.io/js/mina) [![bitHound Score](https://www.bithound.io/CenturyUna/mina/badges/score.svg)](https://www.bithound.io/CenturyUna/mina) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CenturyUna/mina?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![NPM](https://nodei.co/npm/mina.png?downloads=true)](https://nodei.co/npm/mina/)
 
