@@ -1,22 +1,26 @@
 {
   "name": "mina",
-  "version": "1.0.9",
+  "version": "1.0.10",
   "description": "Lightweight deployer for node development, inspired by mina and minco",
   "homepage": "https://github.com/CenturyUna/mina",
   "bugs": "https://github.com/CenturyUna/mina/issues",
   "dependencies": {
-    "cli-color": "~0.3.2",
-    "nopt": "~3.0.0"
+    "cli-color": "^1.1.0",
+    "nopt": "^3.0.6"
   },
   "devDependencies": {
-    "coffee-script": "*"
+    "coffee-script": "^1.10.0"
   },
-  "files": ["bin","completion","lib"],
+  "files": [
+    "bin",
+    "completion",
+    "lib"
+  ],
   "bin": {
     "mina": "./bin/mina-cli"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "echo \"Error: no test specified\" && exit 0",
     "prepublish": "make"
   },
   "repository": {
