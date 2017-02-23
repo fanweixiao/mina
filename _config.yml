@@ -1,0 +1,8 @@
+title: Mina
+description: Lightweight & fast deployment tools for Nodejs project, inspired from Mina on Ruby and minco
+google_analytics: UA-99425-19
+show_downloads: true
+theme: jekyll-theme-merlot
+
+gems:
+  - jekyll-mentions
