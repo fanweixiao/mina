@@ -1,26 +1,23 @@
----
-layout: main
----
-# Mina [![NPM version](https://badge.fury.io/js/mina.png)](http://badge.fury.io/js/mina) [![bitHound Score](https://www.bithound.io/CenturyUna/mina/badges/score.svg)](https://www.bithound.io/CenturyUna/mina) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CenturyUna/mina?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge) {#mina-[![npm-version](https://badge.fury.io/js/mina.png)](http://badge.fury.io/js/mina)-[![bithound-score](https://www.bithound.io/centuryuna/mina/badges/score.svg)](https://www.bithound.io/centuryuna/mina)-[![gitter](https://badges.gitter.im/join%20chat.svg)](https://gitter.im/centuryuna/mina?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)}
+# Mina [![NPM version](https://badge.fury.io/js/mina.png)](http://badge.fury.io/js/mina) [![bitHound Score](https://www.bithound.io/CenturyUna/mina/badges/score.svg)](https://www.bithound.io/CenturyUna/mina) [![Gitter](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/CenturyUna/mina?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![NPM](https://nodei.co/npm/mina.png?downloads=true)](https://nodei.co/npm/mina/)
 
 A simple deploy tool inspired by [mina](http://nadarei.co/mina), based on [minco](https://github.com/dsmatter/minco). This project is powered by [node](http://nodejs.org), forcus on quick and lightweight deployment and server automation over ssh for [node](http://nodejs.org) projects.
 
-## Latest Version {#latest-version}
+## Latest Version
 [v1.0.9](https://npmjs.org/package/mina)
 
-## Installation {#installation}
+## Installation
 Make sure you have installed node.js including NPM
 
     sudo npm install -g mina
 
-## Bash completion {#bash-completion}
+## Bash completion
 Add this to your .bashrc, In this version only support bash
 
     eval "$(mina completion=bash)"
 
-## Usage {#usage}
+## Usage
     # Create an example deploy.json
     mina init
 
@@ -63,12 +60,12 @@ Add this to your .bashrc, In this version only support bash
     # Or, indicate deploy config file
     MINA_CONFIG=deploy_scripts/to_dev.json mina deploy
 
-## Keep in mind... {#keep-in-mind...}
+## Keep in mind...
 
 + You have to ensure the username used for ssh have permission for operating directories
 + You have to ensure the remote server could execute `git clone`, that's means `git-core` must be installed, and, can clone the project from you git-repo.
 
-## Contributors {#contributors}
+## Contributors
 
 + [C.C.](https://github.com/fanweixiao)
 + Neal <neal.ma.sh@gmail.com>
