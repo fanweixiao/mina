@@ -49,6 +49,12 @@ initDeploy = (server, config, color) ->
     for shared_dir in config["shared_dirs"]
       @mkdir dir, "shared", shared_dir
 
+    # Create shared files
+    @log server + " Create shared files", color
+
+    for shared_file in config["shared_files"]
+      @touch dir, "shared", shared_file
+
     # Change to the dir before fetching code
     @cd dir
 
@@ -73,7 +79,13 @@ initDeploy = (server, config, color) ->
     @cd dir, "tmp", "scm"
     @cmd "git", "fetch"
     @cmd "git", "checkout", config["branch"]
-    @cmd "git", "rebase", "origin/#{config["branch"]}" 
+    @cmd "git", "rebase", "origin/#{config["branch"]}"
+
+    # Build Project
+    @log server + " Build projects", color
+    @cd dir, "tmp", "scm", config["prj_git_relative_dir"]
+    for cmd in config["build_cmd"]
+      @raw_cmd cmd
 
     # Copy code to release dir
     @log server + " Copy code to release dir", color
@@ -81,7 +93,7 @@ initDeploy = (server, config, color) ->
     @raw 'rno="$(readlink "' + (path.join dir, "current") + '")"'
     @raw 'rno="$(basename "$rno")"'
     @math "rno=$rno+1"
-    @cmd "cp", "--preserve=timestamps", "-r", (path.join dir, "tmp", "scm", config["prj_git_relative_dir"] || ""), (path.join dir, "releases", "$rno")
+    @cmd "cp", "--preserve=timestamps", "-r", (path.join dir, "tmp", "scm", config["prj_git_relative_dir"] || "", config["dist"] || ''), (path.join dir, "releases", "$rno")
 
     ### Link shared dirs ###
     @log server + " Link shared dirs"
@@ -91,6 +103,13 @@ initDeploy = (server, config, color) ->
       @mkdir (path.dirname shared_dir)
       @raw "[ -h #{shared_dir} ] && unlink #{shared_dir}"
       @cmd "ln", "-s", (path.join dir, "shared", shared_dir), shared_dir
+
+    ### Link shared files ###
+    @log server + " Link shared files"
+    @cd dir, "releases", "$rno"
+    for shared_file in config["shared_files"]
+      @raw "[ -h #{shared_file} ] && unlink #{shared_file}"
+      @cmd "ln -s", (path.join dir, "shared", shared_file), shared_file
 
     ### Run pre-start scripts ###
     @log server + " Run pre-start scripts", color

@@ -72,6 +72,9 @@ class BashScript
   mkdir: (dir_components...) ->
     @cmd "mkdir", "-p", (path.join dir_components...)
 
+  touch: (file_components...) ->
+    @cmd "touch", (path.join file_components...)
+
   math: (expr) ->
     @raw "(( " + expr + " ))"
 
