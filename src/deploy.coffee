@@ -31,6 +31,14 @@ initDeploy = (server, config, color) ->
   bs = new BashScript p.stdin
   # Initiate deployment
   bs.queue ->
+    ### Check deploy.lock ###
+    @if_file_exists "#{dir}/deploy.lock", ->
+      @log server + " A deployment is in process", color
+      @cmd "echo", server, ' A deployment is in process'
+      @cmd "exit 1"
+
+    @touch dir, "deploy.lock"
+
     ### Write cleanup function ###
     @fun "cleanup", ->
       release_dir = path.join dir, "releases", "$rno"
@@ -79,7 +87,10 @@ initDeploy = (server, config, color) ->
     @cd dir, "tmp", "scm"
     @cmd "git", "fetch"
     @cmd "git", "checkout", config["branch"]
-    @cmd "git", "rebase", "origin/#{config["branch"]}"
+    if config["reset_branch"]
+      @cmd "git", "reset", "origin/#{config["branch"]}", "--hard"
+    else
+      @cmd "git", "rebase", "origin/#{config["branch"]}"
 
     # Build Project
     @log server + " Build projects", color
@@ -150,3 +161,7 @@ initDeploy = (server, config, color) ->
             (->
               @while "read rm_dir", ->
                 @cmd "rm", "-rf", "$rm_dir")
+
+    ### Remove deploy.lock ###
+    @cd dir
+    @cmd "rm", "-rf", "deploy.lock"
