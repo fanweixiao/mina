@@ -22,6 +22,9 @@ initDeploy = (server, config, color) ->
   config["history_releases_count"] = 2 if config["history_releases_count"] && config["history_releases_count"] < 2
   # Open connection to server
   _srv_args = []
+  if config["identity_file"]
+    _srv_args.push "-i"
+    _srv_args.push config['identity_file']
   _srv_args.push server
   _srv_args.push "-p #{config['port']}" if config["port"]
   _srv_args.push "bash -s"

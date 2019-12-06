@@ -25,6 +25,8 @@ Add this to your .bashrc, In this version only support bash
     {
         # Servers to deploy to
         "server": ["user@host1","user@host2"]
+        # Identity File if any pem file requied to connect to remote machine
+        , "identity_file": "/home/user/example.pem"
         # Port
         , "port": 13
         # Deploy to this dir on server
