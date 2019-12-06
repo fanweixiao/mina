@@ -23,6 +23,7 @@ initDeploy = (server, config, color) ->
   # Open connection to server
   _srv_args = []
   _srv_args.push server
+  _srv_args.push "-i #{config['identity_file']}" if config["identity_file"]
   _srv_args.push "-p #{config['port']}" if config["port"]
   _srv_args.push "bash -s"
   p = spawn "ssh", _srv_args, stdio: ["pipe", 1, 2]
